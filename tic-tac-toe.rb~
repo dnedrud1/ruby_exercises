@@ -1,11 +1,18 @@
-class Game
+# A game of tic-tac-toe
+# by Daniel Nedrud
+# 10/29/2014
 
+class Game
+	
+	# Each number represents one of the nine squares on a tic-tac-toe board
 	def initialize
 		@board = [1,2,3,4,5,6,7,8,9]
 	end
 		
   def start
   	counter = 1
+  	
+  	# Loop will continue until victory condition is achieved or all of board is full
   	until victory("X") || victory("O")
   		counter % 2 == 0 ? player = "X" : player = "O"
   		
@@ -22,9 +29,12 @@ class Game
 			else
 				puts "Please enter a valid number!"
 			end
+			
+			# Gives a way out of loop if board is full
 			return puts "It's a tie!" if @board.all? {|i| i == "X" || i == "O"} && (!victory("X") && !victory("O"))
 		end
 		
+		# Choses what to display when loop ends
 		if counter % 2 == 0
 			puts "Player O wins!"
 		else
@@ -37,6 +47,7 @@ class Game
   
 	private
   
+  # Victory conidtion (player agnostic)
   def victory(player)
     condition1 = @board[0..2].all? { |i| i == player}
     condition2 = @board[3..5].all? { |i| i == player}

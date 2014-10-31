@@ -1,0 +1,24 @@
+@code = [:r,:o,:o,:p]
+
+def give_clues(attempt)
+  code_holder = @code
+  perfect_match = 0
+  match = 0
+  attempt.each_with_index do |item, index|
+  	if item == code_holder[index]
+  		perfect_match += 1
+  		code_holder[index] = "blank_answer"
+  		attempt[index] = "blank_guess"
+		end
+	end
+	attempt.each do |i|
+		if code_holder.include?(i)
+			match += 1
+		end
+	end
+ 	puts "Perfect Matches: #{perfect_match}, Color Matches: #{match}"
+ 	p code_holder
+ 	p attempt
+end
+
+give_clues([:o,:b,:o,:p])
