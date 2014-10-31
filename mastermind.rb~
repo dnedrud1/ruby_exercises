@@ -11,6 +11,23 @@ class Game
 	end
 	
 	def start
+		puts "Please enter \"player\" if you wish to guess the computer's code."
+		puts "Please enter \"computer\" if you wish to have the computer guess your code."
+		answer = gets.chomp.downcase
+		until answer == "player" || answer == "computer"
+			puts "Please enter a valid choice."
+			answer = gets.chomp.downcase
+		end
+		case answer
+		when "player"
+			player_start()
+		when "computer"
+			computer_start()
+		else
+		end
+	end
+	
+	def player_start
 	  tries = 12
 	
 	  4.times do
@@ -37,6 +54,50 @@ class Game
 	  end
 	  
 	  puts "You won!" if tries > 0
+    
+  end
+  
+  def computer_start
+	  tries = 12
+	
+	  puts "Enter the secret code!"
+	  puts "Select four colors from red, orange, yellow, green, blue and purple (only type the first letter of the word)."
+    
+    @guess = gets.chomp.split("").map { |i| i.downcase.strip.to_sym } 
+    sanitize_input()
+    @code = @guess
+    
+    puts "Thank you! The computer will now attempt to guess you code!"
+    
+    computer_guess = []
+    4.times do
+	    computer_guess.push(@colors[rand(@colors.length)])
+    end
+    
+		until victory(computer_guess)
+		  last_computer_guess = computer_guess.map { |i| i }
+		  tries -= 1
+		  @board.push(computer_guess)
+		  @board.push(give_clues(computer_guess))
+		  
+		  puts "---------------"
+		  puts "Guess again! (#{tries} tries remaining)"
+		  @board.each { |i| p i }
+			computer_guess = []
+			4.times do
+				computer_guess.push(@colors[rand(@colors.length)])
+			end
+			
+			last_computer_guess.each_with_index do |item, index|
+			  if item == @code[index]
+			  	computer_guess[index] = item
+		  	end
+	  	end
+		  
+		  return puts "You won!" if tries <= 1
+	  end
+	  
+	  puts "The computer beat you!" if tries > 0
     
   end
   
