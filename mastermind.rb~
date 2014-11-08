@@ -35,7 +35,8 @@ class Game
     end
     
     puts "Guess the code in 12 tries by entering four colors!"
-    puts "Select your four from red, orange, yellow, green, blue and purple (only type the first letter of the word)."
+    puts "Select from red, orange, yellow, green, blue and purple (only type the first letter of the word)."
+    puts "e.g. rgpo"
     @guess = gets.chomp.split("").map { |i| i.downcase.strip.to_sym } 
     sanitize_input()
     
@@ -62,6 +63,7 @@ class Game
 	
 	  puts "Enter the secret code!"
 	  puts "Select four colors from red, orange, yellow, green, blue and purple (only type the first letter of the word)."
+    puts "e.g. rgpo"
     
     @guess = gets.chomp.split("").map { |i| i.downcase.strip.to_sym } 
     sanitize_input()
