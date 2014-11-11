@@ -1,0 +1,13 @@
+--- !ruby/object:Game
+wrong_letters:
+- E
+- R
+- T
+- S
+- M
+- N
+correct_letters:
+- A
+- I
+wrong_guesses: 3
+word: AXIALLY
