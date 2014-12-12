@@ -1,4 +1,10 @@
+# Enumerable Methods
+# by Daniel Nedrud
+# 12/11/2014
+
+# This module contains enumerable methods meant to emulate built in enumerable methods in Array class.
 module Enumerable
+
   def my_each
     counter = 0
     while counter < self.length
@@ -7,6 +13,7 @@ module Enumerable
     end
     self    
   end
+  
   def my_each_with_index
     counter = 0
     while counter < self.length
@@ -15,6 +22,7 @@ module Enumerable
     end
     self    
   end
+  
   def my_select
     counter = 0
     new_array = []
@@ -26,6 +34,7 @@ module Enumerable
     end
     new_array   
   end
+  
   def my_all?
     counter = 0
     final_tally = 0
@@ -41,6 +50,7 @@ module Enumerable
     end
     answer
   end
+  
   def my_any?
     counter = 0
     answer = false
@@ -52,6 +62,7 @@ module Enumerable
     end
     answer
   end
+  
   def my_none?
     counter = 0
     answer = true
@@ -63,6 +74,7 @@ module Enumerable
     end
     answer
   end
+  
   def my_count
     counter = 0
     self.my_each do |i|
@@ -70,6 +82,7 @@ module Enumerable
     end
     counter
   end
+  
   def my_map(proc_to_call)
     new_array = []
     self.my_each do |i|
@@ -77,6 +90,7 @@ module Enumerable
     end
     new_array
   end
+  
   def my_inject(start = "argument_was_not_passed")
   	if start != "argument_was_not_passed"
 			answer = start
@@ -93,16 +107,14 @@ module Enumerable
 		end
 		answer
 	end
+	
 end
 
 def multiply_els(array_of_nums)
   array_of_nums.my_inject(1) {|i,j| i * j}
 end
 
-buns = ["wheat", "white", "rye", "sourdough", "spelt"]
-nums = [2,9,4,32,7434]
+# nums = [2,9,4,32,7434]
+# my_proc = Proc.new { |arg1| arg1 * 2 }
 
-my_proc = Proc.new { |arg1| arg1 * 2 }
-
-p nums.my_map(my_proc) { |i| i * 2 }
-puts "**break**"
+# p nums.my_map(my_proc) { |i| i * 2 }

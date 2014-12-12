@@ -4,6 +4,8 @@
 
 class Game
 	
+	attr_accessor :board
+	
 	# Each number represents one of the nine squares on a tic-tac-toe board
 	def initialize
 		@board = [1,2,3,4,5,6,7,8,9]
@@ -45,8 +47,6 @@ class Game
 		puts @board[6..8].join(" ")
 	end
   
-	private
-  
   # Victory conidtion (player agnostic)
   def victory(player)
     condition1 = @board[0..2].all? { |i| i == player}
@@ -68,5 +68,5 @@ class Game
 end
 
 
-game = Game.new
-game.start
+# game = Game.new
+# game.start
