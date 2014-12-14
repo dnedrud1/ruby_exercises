@@ -1,0 +1,19 @@
+class Mirror
+  def echo
+    print "enter something: "
+    response = gets.chomp
+    puts "#{response}"
+  end
+end
+
+require 'rspec'
+
+describe Mirror do
+  it "should echo" do
+    @mirror = Mirror.new
+    allow(@mirror).to receive(:gets) { "phrase\n" }
+    #@mirror.stub(:gets) { "phrase\n" }
+    expect(@mirror).to receive(:puts).with("phrase")
+    @mirror.echo
+  end
+end

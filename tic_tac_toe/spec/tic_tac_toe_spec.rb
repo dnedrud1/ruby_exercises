@@ -5,6 +5,14 @@ describe Game do
   before :each do 
     @game = Game.new
   end
+  
+  describe "start" do
+  
+    it "begins with board set" do
+      expect(@game.board).to eql [1,2,3,4,5,6,7,8,9]
+    end
+    
+  end
 
   describe "victory conditions" do
     
@@ -27,6 +35,30 @@ describe Game do
   end
   
   describe "player inputs" do
+    
+    it "accepts a valid number" do
+      allow(@game).to receive(:gets) { "1" }
+      @game.get_move("O")
+      expect(@game.board).to eql ["O",2,3,4,5,6,7,8,9]
+    end
+  
+    it "doesn't accept a number not on the board" do
+		  allow(@game).to receive(:gets) { "10" }
+		  expect(@game).to receive(:puts).with("Please enter a valid number!")
+		  @game.get_move("O")
+    end
+    
+    it "doesn't accept a string" do
+		  allow(@game).to receive(:gets) { "hello" }
+		  expect(@game).to receive(:puts).with("Please enter a valid number!")
+		  @game.get_move("O")
+    end
+    
+    it "doesn't accept a blank input" do
+		  allow(@game).to receive(:gets) { "" }
+		  expect(@game).to receive(:puts).with("Please enter a valid number!")
+		  @game.get_move("O")
+    end
     
   end
   
