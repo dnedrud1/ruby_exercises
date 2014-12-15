@@ -6,7 +6,7 @@ describe Game do
     @game = Game.new
   end
   
-  describe "start" do
+  describe "#start" do
   
     it "begins with board set" do
       expect(@game.board).to eql [1,2,3,4,5,6,7,8,9]

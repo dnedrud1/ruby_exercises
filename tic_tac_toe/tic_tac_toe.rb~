@@ -18,7 +18,7 @@ class Game
   		@counter % 2 == 0 ? player = "X" : player = "O"
   		
 			puts "Player \"#{player}\" pick your move:"
-			puts @board[0..2].join(" ") + "\n" + @board[3..5].join(" ") + "\n" + @board[6..8].join(" ")
+			# puts @board[0..2].join(" ") + "\n" + @board[3..5].join(" ") + "\n" + @board[6..8].join(" ")
 			
       get_move(player)
 			
