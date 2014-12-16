@@ -48,7 +48,7 @@ describe Game do
 		  @game.get_move("O")
     end
     
-    it "doesn't accept a string" do
+    it "doesn't accept letters" do
 		  allow(@game).to receive(:gets) { "hello" }
 		  expect(@game).to receive(:puts).with("Please enter a valid number!")
 		  @game.get_move("O")
