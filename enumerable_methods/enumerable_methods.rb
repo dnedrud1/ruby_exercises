@@ -27,7 +27,7 @@ module Enumerable
     counter = 0
     new_array = []
     while counter < self.length
-    	if yield(self[counter]) == true
+      if yield(self[counter]) == true
         new_array.push(self[counter])
       end
       counter += 1
@@ -40,7 +40,7 @@ module Enumerable
     final_tally = 0
     answer = false
     while counter < self.length
-    	if yield(self[counter]) == true
+      if yield(self[counter]) == true
         final_tally += 1
       end
       counter += 1
@@ -55,7 +55,7 @@ module Enumerable
     counter = 0
     answer = false
     while counter < self.length
-    	if yield(self[counter]) == true
+      if yield(self[counter]) == true
         answer = true
       end
       counter += 1
@@ -67,7 +67,7 @@ module Enumerable
     counter = 0
     answer = true
     while counter < self.length
-    	if yield(self[counter]) == true
+      if yield(self[counter]) == true
         answer = false
       end
       counter += 1
@@ -86,28 +86,28 @@ module Enumerable
   def my_map(proc_to_call)
     new_array = []
     self.my_each do |i|
-    	new_array.push(proc_to_call.call(block_given? ? yield(i) : i))
+      new_array.push(proc_to_call.call(block_given? ? yield(i) : i))
     end
     new_array
   end
   
   def my_inject(start = "argument_was_not_passed")
-  	if start != "argument_was_not_passed"
-			answer = start
-			self.my_each do |i|
-				answer = yield(start,i)
-				start = answer
-			end
-		else
-			start = self[0]
-			self[1..-1].my_each do |i|
-				answer = yield(start,i)
-				start = answer
-			end
-		end
-		answer
-	end
-	
+    if start != "argument_was_not_passed"
+      answer = start
+      self.my_each do |i|
+        answer = yield(start,i)
+        start = answer
+      end
+    else
+      start = self[0]
+      self[1..-1].my_each do |i|
+        answer = yield(start,i)
+        start = answer
+      end
+    end
+    answer
+  end
+  
 end
 
 def multiply_els(array_of_nums)

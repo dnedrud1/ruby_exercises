@@ -71,19 +71,19 @@ describe ConnectFour do
       connect_four.player_move("Ϯ")
     end
     it 'doesnt accept an invalid number' do
-		  allow(connect_four).to receive(:gets) { "10" }
-		  expect(connect_four).to receive(:puts).with("Please enter a valid number!")
-		  connect_four.player_move("ϴ")
+      allow(connect_four).to receive(:gets) { "10" }
+      expect(connect_four).to receive(:puts).with("Please enter a valid number!")
+      connect_four.player_move("ϴ")
     end
     it 'doesnt accept letters' do
-		  allow(connect_four).to receive(:gets) { "hello" }
-		  expect(connect_four).to receive(:puts).with("Please enter a valid number!")
-		  connect_four.player_move("ϴ")
+      allow(connect_four).to receive(:gets) { "hello" }
+      expect(connect_four).to receive(:puts).with("Please enter a valid number!")
+      connect_four.player_move("ϴ")
     end
     it 'doesnt accept blank input' do
-		  allow(connect_four).to receive(:gets) { "" }
-		  expect(connect_four).to receive(:puts).with("Please enter a valid number!")
-		  connect_four.player_move("ϴ")
+      allow(connect_four).to receive(:gets) { "" }
+      expect(connect_four).to receive(:puts).with("Please enter a valid number!")
+      connect_four.player_move("ϴ")
     end
     it 'moves the moves_count up' do
       allow(connect_four).to receive(:gets) { "1" }

@@ -43,21 +43,21 @@ describe Game do
     end
   
     it "doesn't accept a number not on the board" do
-		  allow(@game).to receive(:gets) { "10" }
-		  expect(@game).to receive(:puts).with("Please enter a valid number!")
-		  @game.get_move("O")
+      allow(@game).to receive(:gets) { "10" }
+      expect(@game).to receive(:puts).with("Please enter a valid number!")
+      @game.get_move("O")
     end
     
     it "doesn't accept letters" do
-		  allow(@game).to receive(:gets) { "hello" }
-		  expect(@game).to receive(:puts).with("Please enter a valid number!")
-		  @game.get_move("O")
+      allow(@game).to receive(:gets) { "hello" }
+      expect(@game).to receive(:puts).with("Please enter a valid number!")
+      @game.get_move("O")
     end
     
     it "doesn't accept a blank input" do
-		  allow(@game).to receive(:gets) { "" }
-		  expect(@game).to receive(:puts).with("Please enter a valid number!")
-		  @game.get_move("O")
+      allow(@game).to receive(:gets) { "" }
+      expect(@game).to receive(:puts).with("Please enter a valid number!")
+      @game.get_move("O")
     end
     
   end

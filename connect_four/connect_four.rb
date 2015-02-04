@@ -15,27 +15,27 @@ class ConnectFour
   
   def start
     puts "Welcome to a game of Connect Four!"
-  	# Loop will continue until victory condition is achieved or all of board is full
-  	until victory?("ϴ") || victory?("Ϯ")
-  		@moves_count % 2 == 0 ? player = "ϴ" : player = "Ϯ"
-  		
-			puts "Player \"#{player}\" pick your move:"
-			puts display
-			
+    # Loop will continue until victory condition is achieved or all of board is full
+    until victory?("ϴ") || victory?("Ϯ")
+      @moves_count % 2 == 0 ? player = "ϴ" : player = "Ϯ"
+      
+      puts "Player \"#{player}\" pick your move:"
+      puts display
+      
       player_move(player)
-			
-			# Gives a way out of loop if board is full
-			return puts "There are no winners this game!" if tie?
-		end
-		
-		# Choses what to display when loop ends
-		if @moves_count % 2 == 0
-			puts "Player Ϯ wins!"
-		else
-		  puts "Player ϴ wins!"
-	  end
-		puts display
-	end
+      
+      # Gives a way out of loop if board is full
+      return puts "There are no winners this game!" if tie?
+    end
+    
+    # Choses what to display when loop ends
+    if @moves_count % 2 == 0
+      puts "Player Ϯ wins!"
+    else
+      puts "Player ϴ wins!"
+    end
+    puts display
+  end
   
   def place_piece(piece,position)
     @board.each_with_index do |row,index|

@@ -53,40 +53,40 @@ tree = []
 
 tree.push(Node.new(arr[0]))
 
-	arr[1..-1].each do |i|
-		new_node = Node.new(i)
+  arr[1..-1].each do |i|
+    new_node = Node.new(i)
 
-		condition = false
-		current = tree[0]
-		until condition == true
-		  if i > current.value && current.find_right_child.count == 0
-		    new_node.create_parent(current)
-				current.create_right_child(new_node)
-				tree.push(new_node)
-				condition = true
-		  elsif i < current.value && current.find_left_child.count == 0
-		    new_node.create_parent(current)
-				current.create_left_child(new_node)
-				tree.push(new_node)
-				condition = true
-		  elsif i > current.value && current.find_right_child.count == 1
-		    current = current.find_right_child[0]
-		  elsif i < current.value && current.find_left_child.count == 1
-		    current = current.find_left_child[0]
-		  end
-		end
-	end
+    condition = false
+    current = tree[0]
+    until condition == true
+      if i > current.value && current.find_right_child.count == 0
+        new_node.create_parent(current)
+        current.create_right_child(new_node)
+        tree.push(new_node)
+        condition = true
+      elsif i < current.value && current.find_left_child.count == 0
+        new_node.create_parent(current)
+        current.create_left_child(new_node)
+        tree.push(new_node)
+        condition = true
+      elsif i > current.value && current.find_right_child.count == 1
+        current = current.find_right_child[0]
+      elsif i < current.value && current.find_left_child.count == 1
+        current = current.find_left_child[0]
+      end
+    end
+  end
   tree
 end
 
 # Method to display nodes, children, and parents.
 def see_tree(tree)
-	tree.each do |i|
-		puts "---------------"
-		puts "Node: #{i.value}"
-		puts "Parent: " + i.find_parent[0].value.to_s if i.find_parent.count > 0
-		puts "Left Child: " + i.find_left_child[0].value.to_s if i.find_left_child.count > 0
-		puts "Right Child: " + i.find_right_child[0].value.to_s if i.find_right_child.count > 0
+  tree.each do |i|
+    puts "---------------"
+    puts "Node: #{i.value}"
+    puts "Parent: " + i.find_parent[0].value.to_s if i.find_parent.count > 0
+    puts "Left Child: " + i.find_left_child[0].value.to_s if i.find_left_child.count > 0
+    puts "Right Child: " + i.find_right_child[0].value.to_s if i.find_right_child.count > 0
   end
 end
 
@@ -102,23 +102,23 @@ def breadth_first_search(find,tree)
   until condition == true
     connections = [current.find_right_child[0],current.find_left_child[0]].compact
     if current.value == find
-		  answer = current
-			condition = true
-		elsif visited.count == tree.count
-		  answer = nil
-		  condition = true
-		else
-		  connections.each do |i|
-				if i.value == find
-				  answer = i
-				  condition = true
-			  elsif !visited.include?(i)
-			    visited.push(i)
-			    queue.push(i)
-			  end
-	    end
-	  end
-	  current = queue.shift
+      answer = current
+      condition = true
+    elsif visited.count == tree.count
+      answer = nil
+      condition = true
+    else
+      connections.each do |i|
+        if i.value == find
+          answer = i
+          condition = true
+        elsif !visited.include?(i)
+          visited.push(i)
+          queue.push(i)
+        end
+      end
+    end
+    current = queue.shift
   end
   puts answer ? answer : "Value not found!"
   puts answer.value if answer != nil
@@ -140,39 +140,39 @@ def depth_first_search(find,tree)
     puts "---"
     
     if current.value == find
-		  answer = current
-			condition = true
-		elsif visited.count == tree.count
-		  answer = nil
-		  condition = true
-		else
-		  if connections.count < 1
-		    stack.pop
-		    current = stack[-1]
-	    elsif connections.count == 1
-	      if visited.include?(connections[0])
-				  stack.pop
-				  current = stack[-1]
-	      else
-	        current = connections[0]
-	        stack.push(current)
-	        visited.push(current)
-	      end
-	    else
-	      if visited.include?(connections[0]) && visited.include?(connections[1])
-				  stack.pop
-				  current = stack[-1]
-	      elsif !visited.include?(connections[0])
-	        current = connections[0]
-	        stack.push(current)
-	        visited.push(current)
-	      else
-	        current = connections[1]
-	        stack.push(current)
-	        visited.push(current)
-	      end
-	    end
-	  end
+      answer = current
+      condition = true
+    elsif visited.count == tree.count
+      answer = nil
+      condition = true
+    else
+      if connections.count < 1
+        stack.pop
+        current = stack[-1]
+      elsif connections.count == 1
+        if visited.include?(connections[0])
+          stack.pop
+          current = stack[-1]
+        else
+          current = connections[0]
+          stack.push(current)
+          visited.push(current)
+        end
+      else
+        if visited.include?(connections[0]) && visited.include?(connections[1])
+          stack.pop
+          current = stack[-1]
+        elsif !visited.include?(connections[0])
+          current = connections[0]
+          stack.push(current)
+          visited.push(current)
+        else
+          current = connections[1]
+          stack.push(current)
+          visited.push(current)
+        end
+      end
+    end
   end
   puts answer ? answer : "Value not found!"
   puts answer.value if answer != nil
@@ -190,15 +190,15 @@ def dfs_rec(target,current,array_length,stack,visited)
     return nil
   elsif !left.nil? && !visited.include?(left)
     stack.push(left)
-	visited.push(left)
+  visited.push(left)
     dfs_rec(target,left,array_length,stack,visited)
   elsif !right.nil? && !visited.include?(right)
     stack.push(right)
-	visited.push(right)
+  visited.push(right)
     dfs_rec(target,right,array_length,stack,visited)
   else
     stack.pop
-	dfs_rec(target,parent,array_length,stack,visited)
+  dfs_rec(target,parent,array_length,stack,visited)
   end
 end
 

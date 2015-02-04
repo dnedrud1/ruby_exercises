@@ -21,25 +21,25 @@ class Game
     response = gets.chomp.downcase
     
     until response == "play" || response == "load"
-    	puts "Oops! Please enter \"play\" or \"load\"."
-    	response = gets.chomp.downcase
-  	end
-  	
-  	case response
-  	when "play"
-  	  Game.new.play
-	  when "load"
-	  	puts "Please enter the name of your saved file."
-	  	name = gets.chomp
-	    file = File.open("saves/#{name}.txt", "r")
-			contents = file.read
-			yaml = YAML::load(contents).play
-		end
-	end
-	  
+      puts "Oops! Please enter \"play\" or \"load\"."
+      response = gets.chomp.downcase
+    end
+    
+    case response
+    when "play"
+      Game.new.play
+    when "load"
+      puts "Please enter the name of your saved file."
+      name = gets.chomp
+      file = File.open("saves/#{name}.txt", "r")
+      contents = file.read
+      yaml = YAML::load(contents).play
+    end
+  end
+    
   # This method is called to start a game of Hangman whether from a saved file or from scratch.
   def play
-  	words = File.readlines "5desk.txt"
+    words = File.readlines "5desk.txt"
     eligible_words = words.select { |i| i.length > 4 && i.length < 13 && i[0] == i[0].downcase}
     
     # Chooses a random word if one hasn't been loaded.
@@ -56,18 +56,18 @@ class Game
       case guess
       when "SAVE"
         puts "Please enter a name for your file."
-  		  name = gets.chomp
-  		  save(name)
-		  else    	
-		    if @word.split("").include?(guess)
-		    	@correct_letters.push(guess)
-		  	else
-		  		@wrong_letters.push(guess)
-		  		@wrong_guesses -= 1
-				end
-			end
-			
-  		return puts "Sorry, you didn't guess the word in time! It was \"#{@word}\"." if @wrong_guesses < 1
+        name = gets.chomp
+        save(name)
+      else      
+        if @word.split("").include?(guess)
+          @correct_letters.push(guess)
+        else
+          @wrong_letters.push(guess)
+          @wrong_guesses -= 1
+        end
+      end
+      
+      return puts "Sorry, you didn't guess the word in time! It was \"#{@word}\"." if @wrong_guesses < 1
     end
     
     puts "You won! The word was \"#{@word}\"!" if @wrong_guesses > 0  
@@ -92,27 +92,27 @@ class Game
   
   # This method continues to hound you for input until you give it either an unguessed letter or "save".
   def clean_guess(guess,right,wrong)
-		until (("A".."Z").to_a.include?(guess) && !right.include?(guess) && !wrong.include?(guess)) || guess == "SAVE"
-			puts "Oops! Please enter a valid letter!"
-			guess = gets.chomp.upcase
-		end
-	  guess
+    until (("A".."Z").to_a.include?(guess) && !right.include?(guess) && !wrong.include?(guess)) || guess == "SAVE"
+      puts "Oops! Please enter a valid letter!"
+      guess = gets.chomp.upcase
+    end
+    guess
   end
-	  
-	# Victory is achieved when this method returns the boolean "true".
+    
+  # Victory is achieved when this method returns the boolean "true".
   def victory(word,letters)
     if word.split("").all? { |i| letters.include?(i) }
-    	true
-  	else
-  	  false
-	  end
+      true
+    else
+      false
+    end
   end
   
   # Saves the player's current position in YAML format to a file of their choice in the folder "saves".
   def save (name)
-  	yaml = YAML::dump(self)
-  	file_name = "#{name}.txt"
-  	File.open("saves/" + file_name, "w") { |i| i.write(yaml) }
+    yaml = YAML::dump(self)
+    file_name = "#{name}.txt"
+    File.open("saves/" + file_name, "w") { |i| i.write(yaml) }
   end
   
 end
